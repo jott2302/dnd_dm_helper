@@ -1,4 +1,5 @@
 from dnd_dice import throw_dice
+import pandas as pd
 
 def manual_given_initiative(affected_group, temporary_dict_save):
     for player in affected_group:
@@ -18,9 +19,11 @@ def automatic_rolled_initiative(temporary_dict_save, *affected_group):
         temporary_dict_save.setdefault(participant.lower(), int(int_participant))
 
 
+# strip Kreaturen recherchieren (sauberere Tabelle)
 def display_initiative(temporary_dict_save):
-    for stats in sorted(temporary_dict_save.items(), key=lambda item: item[1], reverse=True):   #Nachschlagen
-        print(stats)
+    table = pd.DataFrame({"Kreatur": temporary_dict_save.keys(), "Initiative": temporary_dict_save.values()})
+    table.sort_values(by="Initiative",inplace=True, ascending=False)
+    print(f"\n{table.to_string(index=False)}\n")
 
 
 def remove_participant(temporary_dict_save):
