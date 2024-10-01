@@ -1,6 +1,6 @@
-
 from dnd_usecasefnct import create_participants
-from dnd_init import manual_given_initiative, automatic_rolled_initiative, display_initiative
+from dnd_init import manual_given_initiative, automatic_rolled_initiative, display_initiative, remove_participant
+
 
 player_names = []
 monster_listing = []
@@ -23,14 +23,13 @@ automatic_rolled_initiative(initiative_dict, monster_listing, ally_listing)
 
 display_initiative(initiative_dict)
 
+remove_participant(initiative_dict)
 
 
-
-#Dicitionary nach Tod kürzen und erneut ausgeben
 
 
 # Spieler Listen sollen Permanent bleiben /Monster nach Eingabe des DM gelöscht oder automatisch vor dem nächsten initiative roll
 # modifier für dice rolls eingeben
-
+# panel für dm erstellen
 
 

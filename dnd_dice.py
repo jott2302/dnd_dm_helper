@@ -2,8 +2,16 @@ import random as r
 import traceback
 
 
+def throw_multiple_dice(dicemaxnum=20, dice_count=1):
+    all_dice = []
+    for count in range(dice_count):
+        (r.randint(1, int(dicemaxnum)))
+    return all_dice
+
+
 def throw_dice(dicemaxnum=20):
-    return (r.randint(1, int(dicemaxnum)))
+        return(r.randint(1, int(dicemaxnum)))
+
 
 
 def run_game():
