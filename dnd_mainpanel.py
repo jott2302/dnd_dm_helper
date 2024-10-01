@@ -7,7 +7,7 @@ monster_listing = []
 ally_listing = []
 initiative_dict = {}
 
-
+print('Lonti und Haggy beste boys <3')
 
 print("Gib zuerst die Spieleranzahl in das Programm ein und benenne diese Anschließend.")
 
