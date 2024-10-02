@@ -1,3 +1,5 @@
+from idlelib.debugobj_r import remote_object_tree_item
+
 from dnd_dice import throw_dice
 import pandas as pd
 
@@ -25,7 +27,6 @@ def display_initiative(temporary_dict_save):
     table.sort_values(by="Initiative",inplace=True, ascending=False)
     print(f"\n{table.to_string(index=False)}\n")
 
-
 def remove_participant(temporary_dict_save):
     while True:
         try:
@@ -36,8 +37,26 @@ def remove_participant(temporary_dict_save):
                 break
             else:
                 temporary_dict_save.pop(participant)
-                display_initiative(temporary_dict_save)
                 break
 
         except KeyError:
             print("Bitte gebe den korrekten Namen des Spielers/ NPC, entsprechend der Auflistung, wieder!")
+
+
+def multi_remove_participant(temporary_dict_save):
+    while True:
+        try:
+            removal_number = input(f"Wieviele Kreaturen sollen aus dem Kampf entfernt werden? (Eingabe 0 -Cancel): ")
+            if removal_number == "0":
+                print("Es wurden keine Teilnehmer entfernt.")
+                display_initiative(temporary_dict_save)
+                break
+            else:
+                for _ in range(int(removal_number)):
+                    remove_participant(temporary_dict_save)
+
+                display_initiative(temporary_dict_save)
+                break
+
+        except ValueError:
+            print("Der Wert muss eine Zahl sein!")
