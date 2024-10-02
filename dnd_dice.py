@@ -2,11 +2,21 @@ import random as r
 import traceback
 
 
-def throw_multiple_dice(dicemaxnum=20, dice_count=1):
-    all_dice = []
-    for count in range(dice_count):
-        (r.randint(1, int(dicemaxnum)))
-    return all_dice
+
+def throw_multiple_dice():
+    while True:
+        try:
+            dicemaxnum = int(input("Welchen Würfel willst du werfen?: "))
+            dice_count = int(input("Wie oft willst du den Würfel werfen?: "))
+            all_dice = []
+            for count in range(dice_count):
+                dice_result = (r.randint(1, int(dicemaxnum)))
+                all_dice.append(dice_result)
+            print(f"Du hast {all_dice} gewürfelt.")
+            print("\n")
+            break
+        except ValueError:
+            print("\nDie Eingaben für die Würfel müssen Zahlen sein.\n")
 
 
 def throw_dice(dicemaxnum=20):

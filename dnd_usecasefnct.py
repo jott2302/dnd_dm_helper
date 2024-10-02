@@ -23,7 +23,7 @@ def create_participants(chosen_names, creature):
 
         dm_list = list(range(decided_number))
         for i in dm_list:
-            monster = f"monster {[i]}"
+            monster = f"monster {i}"
             chosen_names.append(monster)
 
     elif creature == "a":
@@ -36,7 +36,7 @@ def create_participants(chosen_names, creature):
 
         dm_list = list(range(decided_number))
         for i in dm_list:
-            ally = f"Verbündeter {[i]}"
+            ally = f"Verbündeter {i}"
             chosen_names.append(ally)
 
     return chosen_names
