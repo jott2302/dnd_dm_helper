@@ -1,4 +1,6 @@
 def create_participant_list(chosen_names, creature_type):
+    """Determines the list to store the creatures (p - Spieler, m - Monster or a- Verbündeter)
+    and returns the list."""
     decided_number = (decide_creature_count(creature_type))
     generate_creatures(creature_type, decided_number, chosen_names)
 
@@ -6,6 +8,7 @@ def create_participant_list(chosen_names, creature_type):
 
 
 def decide_creature_count(creature_type):
+    """Determines the amount of times a creature is added to a list by an input."""
     creation_question_formats = {
         "p": "Anzahl an Spielern: ",
         "m": "Anzahl der angreifenden Monster: ",
@@ -21,6 +24,8 @@ def decide_creature_count(creature_type):
 
 
 def generate_creatures(creature_type, decided_number, chosen_names):
+    """Adds creatures (p - Spieler, m - Monster or a- Verbündeter) in ascending numbering to a list.
+    If the creature is p- Spieler the creature name is defined by an input."""
     creature_formats = {
         "p": "Wie heißt Spieler {}: ",
         "m": "Monster {}",

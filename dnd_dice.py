@@ -2,6 +2,8 @@ import random as r
 
 
 def throw_multiple_dice():
+    """Prints a list of random numeric values with the maximum number of the
+    entered input as often as the decided amount of times which is determined aswell by input."""
     while True:
         try:
             dicemaxnum = int(input("Welchen Würfel willst du werfen?: "))
@@ -18,7 +20,8 @@ def throw_multiple_dice():
 
 
 def throw_dice(dicemaxnum=20):
-        return(r.randint(1, int(dicemaxnum)))
+    """Returns a random number with the maximum of the entered value."""
+    return(r.randint(1, int(dicemaxnum)))
 
 
 
