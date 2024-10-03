@@ -1,6 +1,4 @@
 import random as r
-import traceback
-
 
 
 def throw_multiple_dice():
@@ -9,7 +7,7 @@ def throw_multiple_dice():
             dicemaxnum = int(input("Welchen Würfel willst du werfen?: "))
             dice_count = int(input("Wie oft willst du den Würfel werfen?: "))
             all_dice = []
-            for count in range(dice_count):
+            for _ in range(dice_count):
                 dice_result = (r.randint(1, int(dicemaxnum)))
                 all_dice.append(dice_result)
             print(f"Du hast {all_dice} gewürfelt.")

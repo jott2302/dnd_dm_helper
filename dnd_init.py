@@ -1,5 +1,3 @@
-from idlelib.debugobj_r import remote_object_tree_item
-
 from dnd_dice import throw_dice
 import pandas as pd
 
@@ -24,13 +22,13 @@ def automatic_rolled_initiative(temporary_dict_save, *affected_group):
 # strip Kreaturen recherchieren (sauberere Tabelle)
 def display_initiative(temporary_dict_save):
     table = pd.DataFrame({"Kreatur": temporary_dict_save.keys(), "Initiative": temporary_dict_save.values()})
-    table.sort_values(by="Initiative",inplace=True, ascending=False)
+    table = table.sort_values(by="Initiative", ascending=False)
     print(f"\n{table.to_string(index=False)}\n")
 
 def remove_participant(temporary_dict_save):
     while True:
         try:
-            participant = input(f"Welcher Mitspieler/ NPC soll aus dem Kampf entfernt werden (Eingabe 0 - Cancel): ").lower()
+            participant = input("Welcher Mitspieler/ NPC soll aus dem Kampf entfernt werden (Eingabe 0 - Cancel): ").lower()
             if participant == "0":
                 print("Es wurde kein Teilnehmer entfernt.")
                 display_initiative(temporary_dict_save)
@@ -46,7 +44,7 @@ def remove_participant(temporary_dict_save):
 def multi_remove_participant(temporary_dict_save):
     while True:
         try:
-            removal_number = input(f"Wieviele Kreaturen sollen aus dem Kampf entfernt werden? (Eingabe 0 -Cancel): ")
+            removal_number = input("Wieviele Kreaturen sollen aus dem Kampf entfernt werden? (Eingabe 0 -Cancel): ")
             if removal_number == "0":
                 print("Es wurden keine Teilnehmer entfernt.")
                 display_initiative(temporary_dict_save)
@@ -60,3 +58,4 @@ def multi_remove_participant(temporary_dict_save):
 
         except ValueError:
             print("Der Wert muss eine Zahl sein!")
+
