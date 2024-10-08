@@ -19,8 +19,8 @@ def decide_creature_count(creature_type):
         try:
             decided_number = int(input(creation_question_formats[creature_type]))
             return decided_number
-        except ValueError:
-            print("Der Wert muss eine Zahl sein.")
+        except (AssertionError, ValueError):
+            print("Der Wert muss eine positive Zahl sein.")
 
 
 def generate_creatures(creature_type, decided_number, chosen_names):

@@ -11,8 +11,8 @@ def manual_given_initiative(affected_group, temporary_dict_save):
                 int_player = input(f"Welche Initiative hat {player} gewürfelt?: ")
                 temporary_dict_save.setdefault(player.lower(), int(int_player))
                 break
-            except ValueError:
-                print("Der Wert muss eine Zahl sein")
+            except (AssertionError, ValueError):
+                print("Der Wert muss eine positive Zahl oder 0 sein")
 
 
 def automatic_rolled_initiative(temporary_dict_save, *affected_group):
@@ -34,36 +34,42 @@ def display_initiative(temporary_dict_save):
 
 
 def remove_participant(temporary_dict_save):
-    """Removes a single participant by name, based on user input."""
+    """Removes a single participant by name."""
     while True:
-        try:
-            participant = input(
-                "Welcher Mitspieler/ NPC soll aus dem Kampf entfernt werden (Eingabe 0 - Cancel): ").lower()
-            if participant == "0":
-                print("Es wurde kein Teilnehmer entfernt.")
-                display_initiative(temporary_dict_save)
-                break
-            else:
-                temporary_dict_save.pop(participant)
-                break
-
-        except KeyError:
-            print("Bitte gebe den korrekten Namen des Spielers/ NPC, entsprechend der Auflistung, wieder!")
+        participant = input(
+            "Welcher Mitspieler/ NPC soll aus dem Kampf entfernt werden (Eingabe 0 - Cancel): ").lower()
+        if participant == "0":
+            print("Es wurde kein Teilnehmer entfernt.")
+            display_initiative(temporary_dict_save)
+            return False
+        elif participant in temporary_dict_save:
+            temporary_dict_save.pop(participant)
+            print(f"{participant} wurde entfernt.")
+            display_initiative(temporary_dict_save)
+            return True
+        else:
+            print(
+                "Teilnehmer nicht gefunden. Bitte gebe den korrekten Namen des Spielers/ NPC, entsprechend der Auflistung, wieder!")
 
 
 def multi_remove_participant(temporary_dict_save):
-    """Removes multiple participants by name, based on user input."""
+    """Removes multiple participants based on user input."""
     while True:
+        removal_number = input("Wieviele Kreaturen sollen aus dem Kampf entfernt werden? (Eingabe 0 -Cancel): ")
+        if removal_number == "0":
+            print("Es wurden keine Teilnehmer entfernt.")
+            display_initiative(temporary_dict_save)
+            return False
         try:
-            removal_number = input("Wieviele Kreaturen sollen aus dem Kampf entfernt werden? (Eingabe 0 -Cancel): ")
-            if removal_number == "0":
-                print("Es wurden keine Teilnehmer entfernt.")
-                display_initiative(temporary_dict_save)
-                break
-            else:
-                for _ in range(int(removal_number)):
-                    remove_participant(temporary_dict_save)
-                break
-
+            removal_number = int(removal_number)
+            remove_any_participant = False
+            for _ in range(removal_number):
+                removed = remove_participant(temporary_dict_save)
+                if removed is False:
+                    print("Vorgang abgebrochen.")
+                    return False
+                elif removed is True:
+                    remove_any_participant = True
+            return remove_any_participant
         except ValueError:
             print("Der Wert muss eine Zahl sein!")

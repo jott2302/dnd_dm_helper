@@ -1,7 +1,7 @@
 from dnd_dice import throw_multiple_dice
 from dnd_usecasefnct import create_participant_list
-from dnd_init import manual_given_initiative, automatic_rolled_initiative, display_initiative, remove_participant, \
-    multi_remove_participant
+from dnd_init import manual_given_initiative, automatic_rolled_initiative, display_initiative
+from dnd_init import remove_participant, multi_remove_participant
 
 player_names = []
 monster_listing = []
@@ -66,6 +66,6 @@ while panel_running:
 # unit Testing anschauen
 # bei 0 eingabe Loop unterbrechen und zurrück in: Mit dem Command Kill/ Multikill eine oder mehrere Kreatur(en) töten oder mit Stop den Kampf beenden:
 # funktionen schreiben für überschneidungen
-
+# assertion error
 
 # modifier für dice rolls eingeben

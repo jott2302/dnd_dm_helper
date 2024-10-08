@@ -15,8 +15,8 @@ def throw_multiple_dice():
             print(f"Du hast {all_dice} gewürfelt.")
             print("\n")
             break
-        except ValueError:
-            print("\nDie Eingaben für die Würfel müssen Zahlen sein.\n")
+        except (AssertionError, ValueError):
+            print("\nDie Eingaben für die Würfel müssen positive Zahlen sein.\n")
 
 
 def throw_dice(dicemaxnum=20):
