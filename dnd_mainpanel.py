@@ -63,9 +63,6 @@ while panel_running:
         print("Deine Eingabe muss ein passendes Command sein. Schlage die Commands über die Eingabe Help nach.")
         print("\n")
 
-# unit Testing anschauen
-# bei 0 eingabe Loop unterbrechen und zurrück in: Mit dem Command Kill/ Multikill eine oder mehrere Kreatur(en) töten oder mit Stop den Kampf beenden:
-# funktionen schreiben für überschneidungen
-# assertion error
 
+# unit Testing anschauen
 # modifier für dice rolls eingeben
