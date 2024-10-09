@@ -66,3 +66,5 @@ while panel_running:
 
 # unit Testing anschauen
 # modifier für dice rolls eingeben
+#assertion Error überarbeiten
+

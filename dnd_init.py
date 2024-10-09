@@ -18,26 +18,36 @@ def manual_given_initiative(affected_group, temporary_dict_save):
 def automatic_rolled_initiative(temporary_dict_save, *affected_group):
     """Adds one or multiple lists contents and associates per content a
     random generated numeric value (initative stat) in a dictionary (key - list content, value - numeric)."""
-    all_groups = sum(affected_group, [])
-    modifier = input("Wie vielen Monstern und Verbündeten soll ein Initiative-Modifier angerechnet werden?: ")
-    if modifier == "0":
-        for participant in all_groups:
-            int_participant = throw_dice()
-            temporary_dict_save.setdefault(participant.lower(), int(int_participant))
-    else:
-       for _ in range(int(modifier)):
-           add_initiative_bonus(temporary_dict_save, _)
+    while True:
+        try:
+            all_groups = sum(affected_group, [])
+            modifier = input("Wie vielen Monstern und Verbündeten soll ein Initiative-Modifier angerechnet werden?: ")
+            if modifier == "0":
+                for participant in all_groups:
+                    int_participant = throw_dice()
+                    temporary_dict_save.setdefault(participant.lower(), int(int_participant))
+                return temporary_dict_save
+            else:
+                for _ in range(int(modifier)):
+                    add_initiative_bonus(temporary_dict_save, _)
+                return temporary_dict_save
+        except(AssertionError, ValueError):
+            print("Der Wert muss eine positive Zahl sein!")
 
-def add_initiative_bonus (temporary_dict_save, modifier):
-    participant = input(f"Benenne die Kreatur {modifier+1}: ")
-    bonus = int(input(f"Bestimme den Initiative-Modifier von {participant}: "))
-    int_participant = bonus + throw_dice()
-    temporary_dict_save.setdefault(participant.lower()+ str(modifier+1), int_participant)
 
-# Kreaturen Namen mit , zwischen zahl und Namen ausgeben
-# keine doppelten namen in der Liste
-# except Error bei falscher initiativ gebung
+def add_initiative_bonus(temporary_dict_save, creature_count):
+    participant = input(f"Benenne die Kreatur {creature_count + 1}: ")
+    while True:
+        try:
+            bonus = int(input(f"Bestimme den Initiative-Modifier von {participant}: "))
+            int_participant = bonus + throw_dice()
+            return temporary_dict_save.setdefault(participant.lower() + " " + str(creature_count + 1), int_participant)
+        except(AssertionError, ValueError):
+            print("Der Wert muss eine positive Zahl sein!")
+
+
 # nach erstellung der modified participants weiter loopen in automatic_rolled_initiative für den rest
+# differenzieren zwischen modified monster und verbündeter
 
 
 def display_initiative(temporary_dict_save):
