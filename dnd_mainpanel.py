@@ -8,6 +8,7 @@ monster_listing = []
 ally_listing = []
 initiative_dict = {}
 
+
 print("Gib zuerst die Spieleranzahl in das Programm ein und benenne diese Anschließend.")
 create_participant_list(player_names, "p")
 
