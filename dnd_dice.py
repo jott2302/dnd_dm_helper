@@ -1,9 +1,28 @@
 import random as r
-import traceback
+
+
+def throw_multiple_dice():
+    """Prints a list of random numeric values with the maximum number of the
+    entered input as often as the decided amount of times which is determined aswell by input."""
+    while True:
+        try:
+            dicemaxnum = int(input("Welchen Würfel willst du werfen?: "))
+            dice_count = int(input("Wie oft willst du den Würfel werfen?: "))
+            all_dice = []
+            for _ in range(dice_count):
+                dice_result = (r.randint(1, int(dicemaxnum)))
+                all_dice.append(dice_result)
+            print(f"Du hast {all_dice} gewürfelt.")
+            print("\n")
+            break
+        except (AssertionError, ValueError):
+            print("\nDie Eingaben für die Würfel müssen positive Zahlen sein.\n")
 
 
 def throw_dice(dicemaxnum=20):
-    return (r.randint(1, int(dicemaxnum)))
+    """Returns a random number with the maximum of the entered value."""
+    return(r.randint(1, int(dicemaxnum)))
+
 
 
 def run_game():
