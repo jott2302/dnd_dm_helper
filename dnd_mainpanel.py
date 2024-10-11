@@ -19,9 +19,10 @@ while panel_running:
     dm_command = input("Welche Aktion willst du ausführen? : ").lower()
     if dm_command == "fight":
         create_participant_list(monster_listing, "m")
+        automatic_rolled_initiative(initiative_dict, monster_listing, "m")
         create_participant_list(ally_listing, "a")
+        automatic_rolled_initiative(initiative_dict, ally_listing, "a")
         manual_given_initiative(player_names, initiative_dict)
-        automatic_rolled_initiative(initiative_dict, monster_listing, ally_listing)
         display_initiative(initiative_dict)
         fight_running = True
         while fight_running:
@@ -66,6 +67,8 @@ while panel_running:
 
 
 # unit Testing anschauen
-# modifier für dice rolls eingeben
+#Alles funktionsmöglichkeiten testen!!!!!!
+#doppelter Ausgabe bug bei remove Abbruch 0 / erfolgreichem Kill überarbeiten
+# falls creature Liste leer keine Modifier abfragen!!!! einfügen
 #assertion Error überarbeiten
 

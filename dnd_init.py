@@ -15,24 +15,34 @@ def manual_given_initiative(affected_group, temporary_dict_save):
                 print("Der Wert muss eine positive Zahl oder 0 sein")
 
 
-def automatic_rolled_initiative(temporary_dict_save, *affected_group):
-    """Adds one or multiple lists contents and associates per content a
-    random generated numeric value (initative stat) in a dictionary (key - list content, value - numeric)."""
+def automatic_rolled_initiative(temporary_dict_save, creature_list, affected_group):
+    """Adds a lists contents and associates per content a
+    random generated numeric value (initiative stat) in a dictionary (key - list content, value - numeric)."""
+    creature_format = {
+        "m" : "Monster",
+        "a" : "Verbündete"
+    }
     while True:
         try:
-            all_groups = sum(affected_group, [])
-            modifier = input("Wie vielen Monstern und Verbündeten soll ein Initiative-Modifier angerechnet werden?: ")
+            modifier = input(f"Für wie viele {creature_format[affected_group]} soll ein Initiative-Modifier angerechnet werden?(0=keine): ")
             if modifier == "0":
-                for participant in all_groups:
-                    int_participant = throw_dice()
-                    temporary_dict_save.setdefault(participant.lower(), int(int_participant))
+                assign_participant_to_initiative(temporary_dict_save, creature_list)
                 return temporary_dict_save
             else:
                 for _ in range(int(modifier)):
                     add_initiative_bonus(temporary_dict_save, _)
+                rest_creatures = len(creature_list) - int(modifier)
+                creature_list = creature_list[:rest_creatures]
+                assign_participant_to_initiative(temporary_dict_save, creature_list)
                 return temporary_dict_save
         except(AssertionError, ValueError):
             print("Der Wert muss eine positive Zahl sein!")
+
+def assign_participant_to_initiative(temporary_dict_save, creature_list):
+    """Loops over the (remaining) Creatures in a list and assigns these to a randomly generated initiative Value"""
+    for participant in creature_list:
+        int_participant = throw_dice()
+        temporary_dict_save.setdefault(participant.lower(), int(int_participant))
 
 
 def add_initiative_bonus(temporary_dict_save, creature_count):

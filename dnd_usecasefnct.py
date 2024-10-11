@@ -3,7 +3,6 @@ def create_participant_list(chosen_names, creature_type):
     and returns the list."""
     decided_number = (decide_creature_count(creature_type))
     generate_creatures(creature_type, decided_number, chosen_names)
-
     return chosen_names
 
 
@@ -12,7 +11,7 @@ def decide_creature_count(creature_type):
     creation_question_formats = {
         "p": "Anzahl an Spielern: ",
         "m": "Anzahl der angreifenden Monster: ",
-        "a": "Wieviele verbündete NPC beteiligen sich an dem Kampf (0 - keine): "
+        "a": "Wie viele verbündete NPC beteiligen sich an dem Kampf (0 - keine): "
     }
 
     while True:
