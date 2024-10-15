@@ -21,8 +21,7 @@ def throw_multiple_dice():
 
 def throw_dice(dicemaxnum=20):
     """Returns a random number with the maximum of the entered value."""
-    return(r.randint(1, int(dicemaxnum)))
-
+    return (r.randint(1, int(dicemaxnum)))
 
 
 def run_game():
@@ -38,4 +37,4 @@ def run_game():
             print(f"Du hast eine {throw_dice(int(user_dice))} gewürfelt\n\n")
         except ValueError:
             # traceback.print_exc()
-            print("Würfel bitte nocheinmal, es ist etwas schief gelaufen.\n\n")
+            print("Würfel bitte noch einmal, es ist etwas schief gelaufen.\n\n")

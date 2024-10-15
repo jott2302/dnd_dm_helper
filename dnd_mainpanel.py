@@ -31,7 +31,6 @@ while panel_running:
                     "Mit dem Command Kill/ Multikill eine oder mehrere Kreatur(en) töten oder mit Stop den Kampf beenden: ").lower()
                 if fight_command == "kill":
                     remove_participant(initiative_dict)
-                    display_initiative(initiative_dict)
                 elif fight_command == "stop":
                     print("\n Der Kampf wurde erfolgreich beendet. \n")
                     monster_listing.clear()
@@ -66,9 +65,7 @@ while panel_running:
         print("\n")
 
 
-# unit Testing anschauen
+#unit Testing anschauen
 #Alles funktionsmöglichkeiten testen!!!!!!
-#doppelter Ausgabe bug bei remove Abbruch 0 / erfolgreichem Kill überarbeiten
-# falls creature Liste leer keine Modifier abfragen!!!! einfügen
 #assertion Error überarbeiten
 

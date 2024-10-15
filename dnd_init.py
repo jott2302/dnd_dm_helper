@@ -22,21 +22,24 @@ def automatic_rolled_initiative(temporary_dict_save, creature_list, affected_gro
         "m" : "Monster",
         "a" : "Verbündete"
     }
-    while True:
-        try:
-            modifier = input(f"Für wie viele {creature_format[affected_group]} soll ein Initiative-Modifier angerechnet werden?(0=keine): ")
-            if modifier == "0":
-                assign_participant_to_initiative(temporary_dict_save, creature_list)
-                return temporary_dict_save
-            else:
-                for _ in range(int(modifier)):
-                    add_initiative_bonus(temporary_dict_save, _)
-                rest_creatures = len(creature_list) - int(modifier)
-                creature_list = creature_list[:rest_creatures]
-                assign_participant_to_initiative(temporary_dict_save, creature_list)
-                return temporary_dict_save
-        except(AssertionError, ValueError):
-            print("Der Wert muss eine positive Zahl sein!")
+    if not creature_list:
+        return False
+    else:
+        while True:
+            try:
+                modifier = input(f"Für wie viele {creature_format[affected_group]} soll ein Initiative-Modifier angerechnet werden?(0=keine): ")
+                if modifier == "0":
+                    assign_participant_to_initiative(temporary_dict_save, creature_list)
+                    return temporary_dict_save
+                else:
+                    for _ in range(int(modifier)):
+                        add_initiative_bonus(temporary_dict_save, _)
+                    rest_creatures = len(creature_list) - int(modifier)
+                    creature_list = creature_list[:rest_creatures]
+                    assign_participant_to_initiative(temporary_dict_save, creature_list)
+                    return temporary_dict_save
+            except(AssertionError, ValueError):
+                print("Der Wert muss eine positive Zahl sein!")
 
 def assign_participant_to_initiative(temporary_dict_save, creature_list):
     """Loops over the (remaining) Creatures in a list and assigns these to a randomly generated initiative Value"""
@@ -90,7 +93,7 @@ def remove_participant(temporary_dict_save):
 def multi_remove_participant(temporary_dict_save):
     """Removes multiple participants based on user input."""
     while True:
-        removal_number = input("Wieviele Kreaturen sollen aus dem Kampf entfernt werden? (Eingabe 0 -Cancel): ")
+        removal_number = input("Wie viele Kreaturen sollen aus dem Kampf entfernt werden? (Eingabe 0 -Cancel): ")
         if removal_number == "0":
             print("Es wurden keine Teilnehmer entfernt.")
             display_initiative(temporary_dict_save)

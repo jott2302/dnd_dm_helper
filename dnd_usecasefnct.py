@@ -17,7 +17,11 @@ def decide_creature_count(creature_type):
     while True:
         try:
             decided_number = int(input(creation_question_formats[creature_type]))
-            return decided_number
+            if decided_number == 0:
+                print("Es wurden keine Kreaturen erstellt.")
+                return False
+            else:
+                return decided_number
         except (AssertionError, ValueError):
             print("Der Wert muss eine positive Zahl sein.")
 
