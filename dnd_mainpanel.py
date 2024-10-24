@@ -1,6 +1,6 @@
 from dnd_dice import throw_multiple_dice
-from dnd_usecasefnct import create_participant_list
-from dnd_init import manual_given_initiative, automatic_rolled_initiative, display_initiative
+from dnd_usecasefnct import create_player_list, creature_creation
+from dnd_init import manual_given_initiative, display_initiative
 from dnd_init import remove_participant, multi_remove_participant
 
 player_names = []
@@ -10,7 +10,7 @@ initiative_dict = {}
 
 
 print("Gib zuerst die Spieleranzahl in das Programm ein und benenne diese Anschließend.")
-create_participant_list(player_names, "p")
+create_player_list(player_names)
 
 panel_running = True
 
@@ -18,10 +18,8 @@ while panel_running:
 
     dm_command = input("Welche Aktion willst du ausführen? : ").lower()
     if dm_command == "fight":
-        create_participant_list(monster_listing, "m")
-        automatic_rolled_initiative(initiative_dict, monster_listing, "m")
-        create_participant_list(ally_listing, "a")
-        automatic_rolled_initiative(initiative_dict, ally_listing, "a")
+        creature_creation(initiative_dict, monster_listing,"m")
+        creature_creation(initiative_dict,ally_listing, "a")
         manual_given_initiative(player_names, initiative_dict)
         display_initiative(initiative_dict)
         fight_running = True
@@ -65,7 +63,11 @@ while panel_running:
         print("\n")
 
 
+
+#unboundlocalerror function creature_generation
+#Funktionsbeschreibungen überarbeiten + Aufräumen Funktionen in py files sortieren
 #unit Testing anschauen
-#Alles funktionsmöglichkeiten testen!!!!!!
 #assertion Error überarbeiten
+#player zu dict machen mit stats abrufbar für dm (permanent speichern)
+#daten aus monster_data ziehen für modifier reihenfolge: welches Monster/ Ally? Wieviele? Ende? Daten ausgeben lassen auf command
 
