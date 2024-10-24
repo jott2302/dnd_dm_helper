@@ -63,11 +63,10 @@ while panel_running:
         print("\n")
 
 
-
-#unboundlocalerror function creature_generation
-#Funktionsbeschreibungen überarbeiten + Aufräumen Funktionen in py files sortieren
-#unit Testing anschauen
-#assertion Error überarbeiten
-#player zu dict machen mit stats abrufbar für dm (permanent speichern)
+#player zu dict machen mit stats abrufbar für dm (permanent speichern) NEXT TO DO
+#Funktionsbeschreibungen überarbeiten + Aufräumen Funktionen in py files sortieren NEXT TO DO
+#unit Testing anschauen KANN MAN MACHEN
+#assertion Error überarbeiten KANN MAN MACHEN
 #daten aus monster_data ziehen für modifier reihenfolge: welches Monster/ Ally? Wieviele? Ende? Daten ausgeben lassen auf command
+# ÜBERNÄCHSTES PROJEKT
 

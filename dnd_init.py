@@ -37,8 +37,8 @@ def creature_generation(creature_type, creature_list):
                     creature_list.append(creature + " " + str(count))
                 print(f"Es wurden {count} {creature} hinzugefügt.")
                 return True
-        except ValueError:
-            print("Der Wert muss eine Zahl sein!")
+        except (UnboundLocalError, ValueError):
+            print("Der Wert muss eine Zahl über 0 sein!")
 
 
 def add_initiative_bonus(temporary_dict_save, creature_list):
