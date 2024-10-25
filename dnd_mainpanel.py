@@ -2,6 +2,19 @@ from dnd_dice import throw_multiple_dice
 from dnd_usecasefnct import create_player_list, creature_creation
 from dnd_init import manual_given_initiative, display_initiative
 from dnd_init import remove_participant, multi_remove_participant
+from stat_display import display_stats
+from ast import literal_eval
+
+filepath_monster = "monster_data/monsters_raw.txt"
+
+with open(filepath_monster, "r", encoding="UTF-8") as file:
+    monster_data = literal_eval(file.read())
+
+filepath_player = "C://Users//julia//Desktop//dnd_player_stats.txt"
+
+with open(filepath_player, "r", encoding="UTF-8") as player_file:
+    player_data = literal_eval(player_file.read())
+
 
 player_names = []
 monster_listing = []
@@ -37,6 +50,9 @@ while panel_running:
                     fight_running = False
                 elif fight_command == "multikill":
                     multi_remove_participant(initiative_dict)
+                elif fight_command == "stats":
+                    display_stats(monster_data, player_data)
+                    display_initiative(initiative_dict)
             except ValueError:
                 print("Du kannst nur Mutlikill/ Kill oder Stop verwenden")
 
@@ -47,6 +63,9 @@ while panel_running:
         print("\nProgramm wurde beendet")
         panel_running = False
 
+    elif dm_command == "stats":
+        display_stats(monster_data,player_data)
+
     elif dm_command == "help":
         print(
             """
@@ -54,6 +73,7 @@ while panel_running:
             Eingabe im Kampf: Kill - Kreatur wird getötet
             Eingabe im Kampf: Multikill - mehrere Kreaturen werden getötet
             Eingabe im Kampf: Stop - Kampf wird beendet
+            Eingabe immer: Stats - Stats von Kreaturen oder Spielern anzeigen lassen
             Eingabe: Dice - wirft eine gewünschte Anzahl an beliebigen Würfeln
             Eingabe: End - Programm Ende
             """)
@@ -63,10 +83,9 @@ while panel_running:
         print("\n")
 
 
-#player zu dict machen mit stats abrufbar für dm (permanent speichern) NEXT TO DO
 #Funktionsbeschreibungen überarbeiten + Aufräumen Funktionen in py files sortieren NEXT TO DO
 #unit Testing anschauen KANN MAN MACHEN
 #assertion Error überarbeiten KANN MAN MACHEN
-#daten aus monster_data ziehen für modifier reihenfolge: welches Monster/ Ally? Wieviele? Ende? Daten ausgeben lassen auf command
+#daten aus monster_data ziehen für modifier
 # ÜBERNÄCHSTES PROJEKT
 
