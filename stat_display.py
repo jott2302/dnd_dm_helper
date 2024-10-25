@@ -1,15 +1,5 @@
 from ast import literal_eval
 
-filepath_monster = "monster_data/monsters_raw.txt"
-
-with open(filepath_monster, "r", encoding="UTF-8") as file:
-    monster_data = literal_eval(file.read())
-
-filepath_player = "C://Users//julia//Desktop//dnd_player_stats.txt"
-
-with open(filepath_player, "r", encoding="UTF-8") as player_file:
-    player_data = literal_eval(player_file.read())
-
 def get_info_creature(data):
     while True:
         try:
@@ -33,16 +23,33 @@ def get_info_player(data):
         except KeyError:
             print("Entweder ist der Spieler nicht in dem Verzeichnis oder du musst auf die genaue Schreibweise achten.")
 
-def get_info_all_players():
-    #for dictionary in data:
-    #    for _ in dictionary:
-    #        print(data)
-    with open("C://Users//julia//Desktop//dnd_player_stats.txt", 'r') as file:
-        for line in file:
-            print(line.strip())
+def get_info_all_players(data):
+    print("\n")
+    for k, v in data.items():
+        print(v)
+    print("\n")
 
 
-get_info_all_players()
+def display_stats(monster_data, player_data):
+    while True:
+        try:
+            stat_type = input("""
+Creature - Kreaturen Stats ausgeben lassen
+Player - Spieler Stats ausgeben lassen
+All Players - Alle Spieler Stats ausgeben lassen
 
-#Commands einfügen
-#get_info_all_players verbessern
+Welche Statuswerte willst du angezeigt bekommen?: """).lower()
+            if stat_type == "creature":
+                get_info_creature(monster_data)
+                return monster_data
+            elif stat_type == "player":
+                get_info_player(player_data)
+                return player_data
+            elif stat_type == "all players":
+                get_info_all_players(player_data)
+                return player_data
+        except ValueError:
+            print("Eingabe muss eines der vorgeschlagenen Commands sein")
+
+
+
