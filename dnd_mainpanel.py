@@ -1,7 +1,8 @@
 from dnd_dice import throw_multiple_dice
 from player_creation import create_player_list, remove_participant, remove_multiple_participant
-from dnd_initiative import assign_player_initiative, display_initiative, assign_creature_initiative
+from dnd_initiative import assign_player_initiative, display_initiative
 from external_data_implement import display_stats
+from creature_creation import assign_creature_initiative
 from ast import literal_eval
 
 filepath_monster = "monster_data/monsters_raw.txt"
@@ -81,7 +82,7 @@ while panel_running:
         print("Deine Eingabe muss ein passendes Command sein. Schlage die Commands über die Eingabe Help nach.")
         print("\n")
 
-
+#projekt auf volle funktionalität testen
 #formatieren in der ausgabe
 #unit Testing anschauen KANN MAN MACHEN
 #assertion Error überarbeiten KANN MAN MACHEN

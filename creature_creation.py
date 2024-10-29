@@ -1,4 +1,4 @@
-from dnd_dice import throw_dice
+from dnd_initiative import add_initiative_bonus
 
 def generate_creatures(creature_type, creature_list, data, temporary_dict_save):
     """Works with a two option string, which decides the input question. Saves strings in a list whicht will be numbered
@@ -28,22 +28,8 @@ def generate_creatures(creature_type, creature_list, data, temporary_dict_save):
         except (UnboundLocalError, ValueError):
             print("Der Wert muss eine Zahl über 0 sein!")
 
-
-def add_initiative_bonus(temporary_dict_save, creature_list, data, creature):
-    """Assigns a string as a key to an integer input as value in a dcitionary. The keys are received from a list. """
+def assign_creature_initiative(temporary_dict_save, creature_list, creature_type, data):
+    """Calls a function multiple times, till it returns false. Then it calls the second function a single time."""
     while True:
-        try:
-            if creature in data:
-                modifier = int(data[creature]["Stats"]["DEX"].split("(")[1][:-1])
-                for creature in creature_list:
-                    int_creature = modifier + throw_dice()
-                    temporary_dict_save.setdefault(creature.lower(), int_creature)
-                return True
-            else:
-                modifier = int(input("Dieser Kreatur muss manuell ein Initiative Wert zugeordnet werden: "))
-                for creature in creature_list:
-                    int_creature = modifier + throw_dice()
-                    temporary_dict_save.setdefault(creature.lower(), int_creature)
-                return False
-        except ValueError:
-            print("Der Wert muss eine Zahl sein!")
+        if not generate_creatures(creature_type, creature_list,data ,temporary_dict_save):
+            break
