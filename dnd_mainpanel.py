@@ -30,8 +30,8 @@ while panel_running:
 
     dm_command = input("Welche Aktion willst du ausführen? : ").lower()
     if dm_command == "fight":
-        assign_creature_initiative(initiative_dict, monster_listing,"m")
-        assign_creature_initiative(initiative_dict,ally_listing, "a")
+        assign_creature_initiative(initiative_dict, monster_listing,"m", monster_data)
+        assign_creature_initiative(initiative_dict,ally_listing, "a", monster_data)
         assign_player_initiative(player_names, initiative_dict)
         display_initiative(initiative_dict)
         fight_running = True
@@ -82,8 +82,7 @@ while panel_running:
         print("\n")
 
 
-
-#daten aus monster_data ziehen für modifier
+#formatieren in der ausgabe
 #unit Testing anschauen KANN MAN MACHEN
 #assertion Error überarbeiten KANN MAN MACHEN
 # GUI
