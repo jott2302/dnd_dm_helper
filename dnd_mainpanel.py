@@ -82,6 +82,7 @@ while panel_running:
         print("Deine Eingabe muss ein passendes Command sein. Schlage die Commands über die Eingabe Help nach.")
         print("\n")
 
+
 #projekt auf volle funktionalität testen
 #formatieren in der ausgabe
 #unit Testing anschauen KANN MAN MACHEN

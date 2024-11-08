@@ -5,7 +5,10 @@ def decide_player_count():
     while True:
         try:
             decided_number = int(input("Bestimme die Anzahl an Mitspielern: "))
-            return decided_number
+            if decided_number > 0:
+                return decided_number
+            else:
+                print("Der Wert muss eine positive Zahl, größer als 0 sein.")
         except (AssertionError, ValueError):
             print("Der Wert muss eine positive Zahl sein.")
 
@@ -13,7 +16,11 @@ def generate_players(decided_number, chosen_names):
     """Adds players to a list, the names are decided via input."""
     for participant in range(decided_number):
         player = input(f"Wie heißt Spieler {participant+1}: ")
-        chosen_names.append(player)
+        if player == "":
+            automatic_generated_player = "Spieler "+str(participant+1)
+            chosen_names.append(automatic_generated_player)
+        else:
+            chosen_names.append(player)
 
 def create_player_list(chosen_names):
     """Calls the function to decide an integer input. Then calls the function to as many strings to a list as the
