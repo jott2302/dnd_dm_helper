@@ -15,12 +15,16 @@ def decide_player_count():
 def generate_players(decided_number, chosen_names):
     """Adds players to a list, the names are decided via input."""
     for participant in range(decided_number):
-        player = input(f"Wie heißt Spieler {participant+1}: ")
-        if player == "":
-            automatic_generated_player = "Spieler "+str(participant+1)
-            chosen_names.append(automatic_generated_player)
-        else:
-            chosen_names.append(player)
+        player = input(f"Wie heißt Spieler {participant+1}: ").strip()
+        if not player:
+            player = f"Spieler {participant+1}"
+        real_name = player
+        name_numbering = 2
+        while player in chosen_names:
+            player = f"{real_name} {name_numbering}"
+            name_numbering += 1
+        chosen_names.append(player)
+    return chosen_names
 
 def create_player_list(chosen_names):
     """Calls the function to decide an integer input. Then calls the function to as many strings to a list as the
