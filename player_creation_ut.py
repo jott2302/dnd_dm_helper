@@ -1,6 +1,7 @@
 import unittest
+from tempfile import tempdir
 from unittest.mock import patch
-from player_creation import decide_player_count, generate_players, remove_participant
+from player_creation import decide_player_count, generate_players, remove_participant, remove_multiple_participant
 
 
 class TestDecidePlayerCount(unittest.TestCase):
@@ -50,7 +51,7 @@ class TestGeneratePlayers(unittest.TestCase):
         self.assertEqual(chosen_names, ["Spieler 1", "Spieler 2", "Jott", "Spieler 4"])
 
     @patch("builtins.input", side_effect=["Julian", "Julian", "Julian ", "Max", "Julian"])
-    def test_reacurring_name(self, mock_input):#
+    def test_reacurring_name(self, mock_input):
         chosen_names = []
         decided_number = 5
         generate_players(decided_number, chosen_names)
@@ -62,6 +63,41 @@ class TestRemoveParticipant(unittest.TestCase):
         temporary_dict_save = {"monster 1" : 2, "monster 2" : 2, "julian": 2}
         remove_participant(temporary_dict_save)
         self.assertEqual(temporary_dict_save, {"monster 2" : 2, "julian": 2})
+
+    @patch("builtins.input", side_effect=["0"])
+    def test_cancel_input(self, mock_input):
+        temporary_dict_save = {"monster 1" : 2, "monster 2" : 2, "julian": 2}
+        self.assertFalse(remove_participant(temporary_dict_save))
+
+    @patch("builtins.input", side_effect=["-1", "0"])
+    @patch("builtins.print")
+    def test_invalid_input(self, mock_print, mock_input):
+        temporary_dict_save = {"monster 1" : 2, "monster 2" : 2, "julian": 2}
+        remove_participant(temporary_dict_save)
+        mock_print.assert_any_call("Teilnehmer nicht gefunden. Bitte gebe den korrekten Namen des Spielers/ NPC, entsprechend der Auflistung, wieder!")
+        mock_print.assert_any_call("Es wurde kein Teilnehmer entfernt.")
+        self.assertEqual(temporary_dict_save, {"monster 1" : 2, "monster 2" : 2, "julian": 2})
+        self.assertEqual(mock_input.call_count, 2)
+
+class TestRemoveMultipleParticipant(unittest.TestCase):
+    @patch("builtins.input", side_effect=["2", "monster 1", "monster 2"])
+    def test_valid_input(self, mock_input):
+        temporary_dict_save = {"monster 1" : 2, "monster 2" : 2, "julian": 2}
+        remove_multiple_participant(temporary_dict_save)
+        self.assertEqual(temporary_dict_save, {"julian": 2})
+
+    @patch("builtins.input", side_effect=["0"])
+    def test_cancel_input(self, mock_input):
+        temporary_dict_save = {"monster 1" : 2, "monster 2" : 2, "julian": 2}
+        remove_multiple_participant(temporary_dict_save)
+        self.assertEqual(temporary_dict_save, {"monster 1" : 2, "monster 2" : 2, "julian": 2})
+
+    @patch("builtins.input", side_effect=["-2"])
+    def test_invalid_input(self, mock_input):
+        temporary_dict_save = {"monster 1": 2, "monster 2": 2, "julian": 2}
+        remove_multiple_participant(temporary_dict_save)
+        self.assertEqual(temporary_dict_save, {"monster 1": 2, "monster 2": 2, "julian": 2})
+
 
 if __name__ == "__main__":
     unittest.main()
