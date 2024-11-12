@@ -1,8 +1,8 @@
 from dnd_dice import throw_multiple_dice
-from dnd_usecasefnct import create_player_list, creature_creation
-from dnd_init import manual_given_initiative, display_initiative
-from dnd_init import remove_participant, multi_remove_participant
-from stat_display import display_stats
+from player_creation import create_player_list, remove_participant, remove_multiple_participant
+from dnd_initiative import assign_player_initiative, display_initiative
+from external_data_implement import display_stats
+from creature_creation import assign_creature_initiative
 from ast import literal_eval
 
 filepath_monster = "monster_data/monsters_raw.txt"
@@ -31,9 +31,9 @@ while panel_running:
 
     dm_command = input("Welche Aktion willst du ausführen? : ").lower()
     if dm_command == "fight":
-        creature_creation(initiative_dict, monster_listing,"m")
-        creature_creation(initiative_dict,ally_listing, "a")
-        manual_given_initiative(player_names, initiative_dict)
+        assign_creature_initiative(initiative_dict, monster_listing,"m", monster_data)
+        assign_creature_initiative(initiative_dict,ally_listing, "a", monster_data)
+        assign_player_initiative(player_names, initiative_dict)
         display_initiative(initiative_dict)
         fight_running = True
         while fight_running:
@@ -49,7 +49,7 @@ while panel_running:
                     initiative_dict.clear()
                     fight_running = False
                 elif fight_command == "multikill":
-                    multi_remove_participant(initiative_dict)
+                    remove_multiple_participant(initiative_dict)
                 elif fight_command == "stats":
                     display_stats(monster_data, player_data)
                     display_initiative(initiative_dict)
@@ -83,9 +83,11 @@ while panel_running:
         print("\n")
 
 
-#Funktionsbeschreibungen überarbeiten + Aufräumen Funktionen in py files sortieren NEXT TO DO
+#projekt auf volle funktionalität testen
+#formatieren in der ausgabe
 #unit Testing anschauen KANN MAN MACHEN
 #assertion Error überarbeiten KANN MAN MACHEN
-#daten aus monster_data ziehen für modifier
-# ÜBERNÄCHSTES PROJEKT
+# GUI
+
+
 

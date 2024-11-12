@@ -1,6 +1,5 @@
-from ast import literal_eval
-
 def get_info_creature(data):
+    """Returns a certain item from a .txt file, decided by an input."""
     while True:
         try:
             wanted_creature = input(str("Von welcher Kreatur sollen die Statuswerte wiedergegeben werden?: ")).lower()
@@ -13,6 +12,7 @@ def get_info_creature(data):
             print("Entweder ist die Kreatur nicht in dem Verzeichnis oder du musst auf die genaue Schreibweise achten.")
 
 def get_info_player(data):
+    """Returns an input item from a .txt file."""
     while True:
         try:
             wanted_player = input(str("Von welchem Spieler sollen die Statuswerte wiedergegeben werden?: ")).lower()
@@ -24,6 +24,7 @@ def get_info_player(data):
             print("Entweder ist der Spieler nicht in dem Verzeichnis oder du musst auf die genaue Schreibweise achten.")
 
 def get_info_all_players(data):
+    """Returns a dictionary from a .txt file."""
     print("\n")
     for k, v in data.items():
         print(v)
@@ -31,6 +32,7 @@ def get_info_all_players(data):
 
 
 def display_stats(monster_data, player_data):
+    """Calls one of either three functions determined by an input."""
     while True:
         try:
             stat_type = input("""
